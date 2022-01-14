@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 
 const users = {}; // 데이터 저장용
 
+// async를 보통 함수 앞에서만 선언해준다고 생각하는데 여기서 써줄 수 있는 이유는 익명함수로서 변수로 받은 것일 것
 http.createServer(async (req, res) => {
   try {
     if (req.method === 'GET') {
