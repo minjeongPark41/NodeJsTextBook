@@ -21,10 +21,10 @@ http.createServer(async (req, res) => {
     const expires = new Date();
     // 쿠키 유효 시간을 현재시간 + 5분으로 설정
     expires.setMinutes(expires.getMinutes() + 5);
-    res.writeHead(302, {
-      Location: '/',
+    res.writeHead(302, { //302는 redirect 코드
+      Location: '/', // 여기로 redirect 해줘 
       'Set-Cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,
-    });
+    }); // expires 안넣어주면 session cookie가 되어서는 브라우저 닫는 순간 쿠기가 사라져버림. httpOnly는 js로 쿠키에 접근하지 못하도록 해주는 것 (보안 목적)
     res.end();
   // name이라는 쿠키가 있는 경우
   } else if (cookies.name) {
