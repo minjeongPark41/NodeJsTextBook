@@ -25,8 +25,9 @@ http.createServer(async (req, res) => {
       Location: '/', // 여기로 redirect 해줘 
       'Set-Cookie': `name=${encodeURIComponent(name)}; Expires=${expires.toGMTString()}; HttpOnly; Path=/`,
     }); // expires 안넣어주면 session cookie가 되어서는 브라우저 닫는 순간 쿠기가 사라져버림. httpOnly는 js로 쿠키에 접근하지 못하도록 해주는 것 (보안 목적)
+    // Path 부분은 / 아래로는 다 cookie가 유효하도록 하겠다는 뜻
     res.end();
-  // name이라는 쿠키가 있는 경우
+  // name이라는 쿠키가 있는 경우 (위에서 쿠키를 만들어줬으니 이 다음부터는 아래 코드가 실행될 것)
   } else if (cookies.name) {
     res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end(`${cookies.name}님 안녕하세요`);
